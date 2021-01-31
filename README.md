@@ -42,3 +42,5 @@ public class Main {
 }
 ```
 * Now you can start your application and use a simple tray icon :) 
+
+![tray-example](.github/img/tray-example.png)
