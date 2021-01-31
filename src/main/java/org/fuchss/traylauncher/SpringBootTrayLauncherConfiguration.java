@@ -17,8 +17,8 @@ public class SpringBootTrayLauncherConfiguration {
 	private String name;
 	private String mainUrl;
 	private boolean autoOpenMainUrl = true;
-	private Image trayIcon;
-	private List<UrlEntry> entries;
+	private Image trayIconImage;
+	private List<UrlEntry> additionalEntries;
 
 	/**
 	 * Set the name, main url (entry point to - see
@@ -34,7 +34,7 @@ public class SpringBootTrayLauncherConfiguration {
 	public SpringBootTrayLauncherConfiguration(String name, String mainUrl, Image trayIcon) {
 		this.setName(name);
 		this.setMainUrl(mainUrl);
-		this.setTrayIcon(trayIcon);
+		this.setTrayIconImage(trayIcon);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class SpringBootTrayLauncherConfiguration {
 	public SpringBootTrayLauncherConfiguration(String name, String mainUrl, InputStream trayIcon) {
 		this.setName(name);
 		this.setMainUrl(mainUrl);
-		this.setTrayIcon(trayIcon);
+		this.setTrayIconImage(trayIcon);
 	}
 
 	/**
@@ -78,8 +78,8 @@ public class SpringBootTrayLauncherConfiguration {
 	 *
 	 * @return the image for the tray icon
 	 */
-	public Image getTrayIcon() {
-		return this.trayIcon;
+	public Image getTrayIconImage() {
+		return this.trayIconImage;
 	}
 
 	/**
@@ -88,7 +88,7 @@ public class SpringBootTrayLauncherConfiguration {
 	 * @return additional urls for the context menu
 	 */
 	public List<UrlEntry> getAdditionalUrls() {
-		return this.entries;
+		return this.additionalEntries;
 	}
 
 	/**
@@ -126,27 +126,27 @@ public class SpringBootTrayLauncherConfiguration {
 	}
 
 	/**
-	 * Setter for {@link #getTrayIcon()}.
+	 * Setter for {@link #getTrayIconImage()}.
 	 *
 	 * @param trayIcon
 	 *            the new tray icon image
 	 * @return {@code this}
 	 */
-	public SpringBootTrayLauncherConfiguration setTrayIcon(Image trayIcon) {
-		this.trayIcon = trayIcon;
+	public SpringBootTrayLauncherConfiguration setTrayIconImage(Image trayIcon) {
+		this.trayIconImage = trayIcon;
 		return this;
 	}
 
 	/**
-	 * Setter for {@link #getTrayIcon()}.
+	 * Setter for {@link #getTrayIconImage()}.
 	 *
 	 * @param trayIcon
 	 *            the new tray icon image
 	 * @return {@code this}
 	 */
-	public SpringBootTrayLauncherConfiguration setTrayIcon(InputStream trayIcon) {
+	public SpringBootTrayLauncherConfiguration setTrayIconImage(InputStream trayIcon) {
 		try {
-			this.trayIcon = ImageIO.read(trayIcon);
+			this.trayIconImage = ImageIO.read(trayIcon);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -161,7 +161,7 @@ public class SpringBootTrayLauncherConfiguration {
 	 * @return {@code this}
 	 */
 	public SpringBootTrayLauncherConfiguration setAdditionalUrls(List<UrlEntry> entries) {
-		this.entries = entries;
+		this.additionalEntries = entries;
 		return this;
 	}
 

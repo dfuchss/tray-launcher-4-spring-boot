@@ -10,8 +10,13 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
@@ -38,24 +43,47 @@ public final class SpringBootTrayLauncher {
 	 *            the configuration for the {@link SpringBootTrayLauncher}
 	 */
 	public static void run(Class<?> starterClass, String[] args, SpringBootTrayLauncherConfiguration conf) {
+		final Container container = new Container();
+		container.conf = conf;
+
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(starterClass);
 		builder.headless(false);
 		SpringApplication app = builder.application();
-		ConfigurableApplicationContext ctx = app.run(args);
 
-		if (conf.isAutoOpenMainUrl()) {
-			SpringBootTrayLauncher.openUrl(conf.getMainUrl());
-		}
+		// Add after startup listeners ..
+		app.addListeners(e -> SpringBootTrayLauncher.afterStartup(e, () -> SpringBootTrayLauncher.initialMainLaunch(container)));
+		app.addListeners(e -> SpringBootTrayLauncher.afterStartup(e, () -> SpringBootTrayLauncher.initTray(container)));
 
-		SpringBootTrayLauncher.initTray(conf, ctx);
+		container.ctx = app.run(args);
 	}
 
-	private static void initTray(SpringBootTrayLauncherConfiguration conf, ConfigurableApplicationContext ctx) {
+	private static void openUrl(String urlToOpen) {
+		if (urlToOpen == null) {
+			return;
+		}
+		try {
+			Desktop.getDesktop().browse(new URI(urlToOpen));
+		} catch (IOException | URISyntaxException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void initialMainLaunch(Container container) {
+		if (container.conf.isAutoOpenMainUrl()) {
+			SpringBootTrayLauncher.openUrl(container.conf.getMainUrl());
+		}
+	}
+
+	private static void initTray(Container container) {
 		if (!SystemTray.isSupported()) {
 			System.err.println("Sorry, SystemTray is not supported");
 			return;
 		}
-		TrayIcon trayIcon = SpringBootTrayLauncher.createTrayIcon(conf);
+
+		SpringBootTrayLauncher.activateSystemLookAndFeel();
+
+		var conf = container.conf;
+		TrayIcon trayIcon = SpringBootTrayLauncher.createTrayIcon(container);
 		trayIcon.addActionListener(e -> SpringBootTrayLauncher.openUrl(conf.getMainUrl()));
 
 		PopupMenu popup = new PopupMenu();
@@ -73,7 +101,7 @@ public final class SpringBootTrayLauncher {
 		}
 
 		MenuItem exitItem = new MenuItem("Exit");
-		exitItem.addActionListener(e -> SpringBootTrayLauncher.exit(ctx, trayIcon));
+		exitItem.addActionListener(e -> SpringBootTrayLauncher.exit(container));
 		popup.add(exitItem);
 
 		try {
@@ -85,29 +113,42 @@ public final class SpringBootTrayLauncher {
 		}
 	}
 
-	private static TrayIcon createTrayIcon(SpringBootTrayLauncherConfiguration conf) {
-		TrayIcon icon = new TrayIcon(conf.getTrayIcon(), conf.getName());
-		icon.setImageAutoSize(true);
-		return icon;
+	private static TrayIcon createTrayIcon(Container container) {
+		var conf = container.conf;
+
+		TrayIcon trayIcon = new TrayIcon(conf.getTrayIconImage(), conf.getName());
+		trayIcon.setImageAutoSize(true);
+
+		container.trayIcon = trayIcon;
+		return trayIcon;
 	}
 
-	private static void exit(ConfigurableApplicationContext ctx, TrayIcon trayIcon) {
+	private static void exit(Container container) {
 		// Terminate Spring
-		SpringApplication.exit(ctx);
+		SpringApplication.exit(container.ctx);
 		// Terminate AWT
 		SystemTray tray = SystemTray.getSystemTray();
-		tray.remove(trayIcon);
+		tray.remove(container.trayIcon);
 	}
 
-	private static void openUrl(String urlToOpen) {
-		if (urlToOpen == null) {
+	private static final class Container {
+		SpringBootTrayLauncherConfiguration conf;
+		ConfigurableApplicationContext ctx;
+		TrayIcon trayIcon;
+	}
+
+	private static void activateSystemLookAndFeel() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
+	private static void afterStartup(ApplicationEvent e, Runnable r) {
+		if (!(e instanceof ApplicationStartedEvent)) {
 			return;
 		}
-		try {
-			System.out.println("Opening .. " + urlToOpen);
-			Desktop.getDesktop().browse(new URI(urlToOpen));
-		} catch (IOException | URISyntaxException e) {
-			e.printStackTrace();
-		}
+		r.run();
 	}
 }
