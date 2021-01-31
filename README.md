@@ -15,7 +15,7 @@ A simple tool to use a Tray Launcher for Spring Boot Applications
   <dependency>
     <groupId>org.fuchss</groupId>
     <artifactId>tray-launcher-4-spring-boot</artifactId>
-    <version>develop-SNAPSHOT</version>
+    <version>0.1</version>
   </dependency>
 </dependencies>
 ```
