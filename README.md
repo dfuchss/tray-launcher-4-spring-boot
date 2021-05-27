@@ -1,4 +1,7 @@
 # tray-launcher-4-spring-boot
+[![Maven Deploy (Prod)](https://github.com/dfuchss/tray-launcher-4-spring-boot/actions/workflows/deploy-prod.yml/badge.svg)](https://github.com/dfuchss/tray-launcher-4-spring-boot/actions/workflows/deploy-prod.yml)
+[![Latest Release](https://img.shields.io/github/release/dfuchss/tray-launcher-4-spring-boot.svg)](https://github.com/dfuchss/tray-launcher-4-spring-boot/releases/latest)
+
 A simple tool to use a Tray Launcher for Spring Boot Applications
 
 ## HowTo
