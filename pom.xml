@@ -10,6 +10,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.target>16</maven.compiler.target>
 		<maven.compiler.source>16</maven.compiler.source>
+		<sonar.projectKey>dfuchss_tray-launcher-4-spring-boot</sonar.projectKey>
+		<sonar.organization>dfuchss</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<distributionManagement>
