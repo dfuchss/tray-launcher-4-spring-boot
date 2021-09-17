@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.fuchss</groupId>
 	<artifactId>tray-launcher-4-spring-boot</artifactId>
-	<version>develop-SNAPSHOT</version>
+	<version>0.3</version>
 	<name>Tray Launer for Spring Boot</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
