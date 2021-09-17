@@ -12,7 +12,9 @@ A simple tool to use a Tray Launcher for Spring Boot Applications
 	<repository>
 		<id>gh-fuchss</id>
 		<name>GitHub Maven Packages</name>
-		<url>https://nexus.fuchss.org/repository/github/</url>
+		<url>https://packages.fuchss.org/github/releases/raw/branch/releases/</url>
+		OR
+		<url>https://packages.fuchss.org/github/snapshots/raw/branch/snapshots/</url>
 	</repository>
 </repositories>
 <dependencies>
