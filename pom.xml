@@ -16,29 +16,41 @@
 		<repository>
 			<id>gh-releases</id>
 			<name>git.fuchss.org Releases</name>
-			<url>https://nexus.fuchss.org/repository/github-releases/</url>
+			<url>git:releases://https://gh-actions:${env.DEPLOY_PASS}@packages.fuchss.org/github/releases.git</url>
 		</repository>
 		<snapshotRepository>
 			<id>gh-snapshots</id>
 			<name>git.fuchss.org Snapshots</name>
-			<url>https://nexus.fuchss.org/repository/github-snapshots/</url>
+			<url>git:snapshots://https://gh-actions:${env.DEPLOY_PASS}@packages.fuchss.org/github/snapshots.git</url>
 		</snapshotRepository>
 	</distributionManagement>
-
+	<pluginRepositories>
+		<pluginRepository>
+			<id>synergian-repo</id>
+			<url>https://raw.github.com/synergian/wagon-git/releases</url>
+		</pluginRepository>
+	</pluginRepositories>	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.3.4.RELEASE</version>
+			<version>2.5.4</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
+		<extensions>
+			<extension>
+				<groupId>ar.com.synergian</groupId>
+				<artifactId>wagon-git</artifactId>
+				<version>0.2.5</version>
+			</extension>
+		</extensions>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version>
+				<version>3.2.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -51,7 +63,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.1.0</version>
+				<version>3.3.1</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
