@@ -1,17 +1,15 @@
 package org.fuchss.traylauncher;
 
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 /**
  * The configuration for {@link SpringBootTrayLauncher}.
  *
  * @author Dominik Fuchss
- *
  */
 public class SpringBootTrayLauncherConfiguration {
 	private String name;
@@ -24,12 +22,9 @@ public class SpringBootTrayLauncherConfiguration {
 	 * Set the name, main url (entry point to - see
 	 * {@link #isAutoOpenMainUrl()}), and an image for the tray.
 	 *
-	 * @param name
-	 *            the name of the application
-	 * @param mainUrl
-	 *            the main url
-	 * @param trayIcon
-	 *            the tray icon image as image
+	 * @param name     the name of the application
+	 * @param mainUrl  the main url
+	 * @param trayIcon the tray icon image as image
 	 */
 	public SpringBootTrayLauncherConfiguration(String name, String mainUrl, Image trayIcon) {
 		this.setName(name);
@@ -41,12 +36,9 @@ public class SpringBootTrayLauncherConfiguration {
 	 * Set the name, main url (entry point to - see
 	 * {@link #isAutoOpenMainUrl()}), and an image for the tray.
 	 *
-	 * @param name
-	 *            the name of the application
-	 * @param mainUrl
-	 *            the main url
-	 * @param trayIcon
-	 *            the tray icon image as input stream
+	 * @param name     the name of the application
+	 * @param mainUrl  the main url
+	 * @param trayIcon the tray icon image as input stream
 	 */
 	public SpringBootTrayLauncherConfiguration(String name, String mainUrl, InputStream trayIcon) {
 		this.setName(name);
@@ -104,8 +96,7 @@ public class SpringBootTrayLauncherConfiguration {
 	/**
 	 * Setter for {@link #getName()}.
 	 *
-	 * @param name
-	 *            the new name
+	 * @param name the new name
 	 * @return {@code this}
 	 */
 	public SpringBootTrayLauncherConfiguration setName(String name) {
@@ -116,8 +107,7 @@ public class SpringBootTrayLauncherConfiguration {
 	/**
 	 * Setter for {@link #getMainUrl()}.
 	 *
-	 * @param mainUrl
-	 *            the new main url
+	 * @param mainUrl the new main url
 	 * @return {@code this}
 	 */
 	public SpringBootTrayLauncherConfiguration setMainUrl(String mainUrl) {
@@ -128,8 +118,7 @@ public class SpringBootTrayLauncherConfiguration {
 	/**
 	 * Setter for {@link #getTrayIconImage()}.
 	 *
-	 * @param trayIcon
-	 *            the new tray icon image
+	 * @param trayIcon the new tray icon image
 	 * @return {@code this}
 	 */
 	public SpringBootTrayLauncherConfiguration setTrayIconImage(Image trayIcon) {
@@ -140,8 +129,7 @@ public class SpringBootTrayLauncherConfiguration {
 	/**
 	 * Setter for {@link #getTrayIconImage()}.
 	 *
-	 * @param trayIcon
-	 *            the new tray icon image
+	 * @param trayIcon the new tray icon image
 	 * @return {@code this}
 	 */
 	public SpringBootTrayLauncherConfiguration setTrayIconImage(InputStream trayIcon) {
@@ -156,8 +144,7 @@ public class SpringBootTrayLauncherConfiguration {
 	/**
 	 * Setter for {@link #getAdditionalUrls()}.
 	 *
-	 * @param entries
-	 *            the new additional url entries
+	 * @param entries the new additional url entries
 	 * @return {@code this}
 	 */
 	public SpringBootTrayLauncherConfiguration setAdditionalUrls(List<UrlEntry> entries) {
@@ -168,8 +155,7 @@ public class SpringBootTrayLauncherConfiguration {
 	/**
 	 * Setter for {@link #isAutoOpenMainUrl()}.
 	 *
-	 * @param autoOpenMainUrl
-	 *            the new value for {@link #isAutoOpenMainUrl()}
+	 * @param autoOpenMainUrl the new value for {@link #isAutoOpenMainUrl()}
 	 * @return {@code this}
 	 */
 	public SpringBootTrayLauncherConfiguration setAutoOpenMainUrl(boolean autoOpenMainUrl) {

@@ -5,19 +5,16 @@ package org.fuchss.traylauncher;
  * context menu of the tray icon, as well as the url to open.
  *
  * @author Dominik Fuchss
- *
  */
 public final class UrlEntry {
-	private String name;
-	private String url;
+	private final String name;
+	private final String url;
 
 	/**
 	 * Create by name of button and url.
 	 *
-	 * @param name
-	 *            the name of the button
-	 * @param url
-	 *            the url to open
+	 * @param name the name of the button
+	 * @param url  the url to open
 	 */
 	public UrlEntry(String name, String url) {
 		this.name = name;

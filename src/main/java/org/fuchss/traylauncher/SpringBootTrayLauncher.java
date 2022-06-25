@@ -1,31 +1,27 @@
 package org.fuchss.traylauncher;
 
-import java.awt.AWTException;
-import java.awt.Desktop;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
-import java.awt.SystemTray;
-import java.awt.TrayIcon;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 /**
  * The entry point for the <em>Tray Launcher 4 Spring Boot</em>
  *
  * @author Dominik Fuchss
- *
  */
 public final class SpringBootTrayLauncher {
+	private static final Logger logger = LoggerFactory.getLogger(SpringBootTrayLauncher.class);
+
 	private SpringBootTrayLauncher() {
 		throw new IllegalAccessError();
 	}
@@ -35,12 +31,9 @@ public final class SpringBootTrayLauncher {
 	 * {@code SpringApplication.run(Main.class, args)} with an invocation of
 	 * this method.
 	 *
-	 * @param starterClass
-	 *            the starter class of the Spring Boot Application.
-	 * @param args
-	 *            the command line arguments
-	 * @param conf
-	 *            the configuration for the {@link SpringBootTrayLauncher}
+	 * @param starterClass the starter class of the Spring Boot Application.
+	 * @param args         the command line arguments
+	 * @param conf         the configuration for the {@link SpringBootTrayLauncher}
 	 */
 	public static void run(Class<?> starterClass, String[] args, SpringBootTrayLauncherConfiguration conf) {
 		final Container container = new Container();
@@ -76,7 +69,7 @@ public final class SpringBootTrayLauncher {
 
 	private static void initTray(Container container) {
 		if (!SystemTray.isSupported()) {
-			System.err.println("Sorry, SystemTray is not supported");
+			logger.error("Sorry, SystemTray is not supported");
 			return;
 		}
 
@@ -109,7 +102,7 @@ public final class SpringBootTrayLauncher {
 			trayIcon.setPopupMenu(popup);
 			tray.add(trayIcon);
 		} catch (AWTException e) {
-			System.err.println("Sorry, TrayIcon could not be added.");
+			logger.error("Sorry, TrayIcon could not be added.");
 		}
 	}
 
@@ -141,7 +134,7 @@ public final class SpringBootTrayLauncher {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-			System.err.println(e.getMessage());
+			logger.error(e.getMessage(), e);
 		}
 	}
 
