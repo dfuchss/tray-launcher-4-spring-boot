@@ -9,19 +9,12 @@ A simple tool to use a Tray Launcher for Spring Boot Applications
 ## HowTo
 * Add the tray launcher dependency to maven ..
 ```xml
-<repositories>
-    <repository>
-        <id>maven-snapshots</id>
-        <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-</repositories>
-
 <dependencies>
-<dependency>
-    <groupId>org.fuchss</groupId>
-    <artifactId>tray-launcher-4-spring-boot</artifactId>
-    <version>develop-SNAPSHOT</version>
-</dependency>
+    <dependency>
+        <groupId>org.fuchss</groupId>
+        <artifactId>tray-launcher-4-spring-boot</artifactId>
+        <version>X.Y.Z</version>
+    </dependency>
 </dependencies>
 ```
 * Create a simple configuration that contains at least the name, default url, and icon of your project:
