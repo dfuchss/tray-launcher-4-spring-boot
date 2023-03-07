@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.fuchss</groupId>
 	<artifactId>tray-launcher-4-spring-boot</artifactId>
-	<version>0.4.4</version>
+	<version>0.4.5-SNAPSHOT</version>
 	<name>Tray Launcher for Spring Boot</name>
 	<description>This project provides a simple lib to use a Tray Launchers for Spring Boot Applications</description>
 	<url>https://github.com/dfuchss/tray-launcher-4-spring-boot</url>
@@ -25,7 +25,7 @@
 		<connection>scm:git:git://github.com/dfuchss/tray-launcher-4-spring-boot.git</connection>
 		<developerConnection>scm:git:ssh://github.com:dfuchss/tray-launcher-4-spring-boot.git</developerConnection>
 		<url>https://github.com/dfuchss/tray-launcher-4-spring-boot/tree/main</url>
-		<tag>v0.4.4</tag>
+		<tag>v0.4</tag>
 	</scm>
 
 	<properties>
