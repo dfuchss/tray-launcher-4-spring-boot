@@ -25,13 +25,13 @@
 		<connection>scm:git:git://github.com/dfuchss/tray-launcher-4-spring-boot.git</connection>
 		<developerConnection>scm:git:ssh://github.com:dfuchss/tray-launcher-4-spring-boot.git</developerConnection>
 		<url>https://github.com/dfuchss/tray-launcher-4-spring-boot/tree/main</url>
-		<tag>v0.4</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.target>17</maven.compiler.target>
-		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<maven.compiler.source>21</maven.compiler.source>
 		<sonar.projectKey>dfuchss_tray-launcher-4-spring-boot</sonar.projectKey>
 		<sonar.organization>dfuchss</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
