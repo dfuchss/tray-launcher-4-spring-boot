@@ -67,6 +67,7 @@
                     <publishingServerId>central</publishingServerId>
                     <autoPublish>true</autoPublish>
                     <waitUntil>published</waitUntil>
+					<deploymentName>tray-launcher-4-spring-boot</deploymentName>
                 </configuration>
             </plugin>
 			<plugin>
